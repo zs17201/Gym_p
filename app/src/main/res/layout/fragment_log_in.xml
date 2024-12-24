@@ -107,6 +107,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="#121212"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <!-- Signup Button -->
