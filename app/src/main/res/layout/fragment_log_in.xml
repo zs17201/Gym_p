@@ -23,9 +23,42 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        >
 
-        <TextView
+
+        <Button
+            android:id="@+id/btn_login1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Login"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#00FF6F"
+            android:paddingVertical="12dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif-medium"
+            android:outlineProvider="none" />
+
+        <Button
+            android:id="@+id/btn_signup1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Signup"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:textColor="#888888"
+            android:paddingVertical="12dp"
+            android:outlineProvider="none"
+            android:fontFamily="sans-serif-medium" />
+
+
+
+
+        <!--<TextView
             android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,7 +87,7 @@
             android:focusable="true"
             android:paddingVertical="12dp"
             android:fontFamily="sans-serif-medium"
-            />
+            />-->
 
     </LinearLayout>
 
