@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "504734907047",
+    "project_id": "gymify-d28c8",
+    "storage_bucket": "gymify-d28c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504734907047:android:3fbf02d7b4b02a41e03982",
+        "android_client_info": {
+          "package_name": "com.example.gym_p"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxGCObPR9bmyYBOR3b5dA8CwtTDH9U-P8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
