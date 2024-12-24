@@ -4,9 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.gym_p.R;
 
@@ -60,7 +65,46 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false);
+
+        View view= inflater.inflate(R.layout.fragment_signup, container, false);
+        EditText etEmail = view.findViewById(R.id.et_email);
+        EditText etPassword1=view.findViewById(R.id.et_password1);
+        EditText etPassword2=view.findViewById(R.id.et_password2);
+        Button btnSignup=view.findViewById(R.id.btn_signup);
+        btnSignup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                validateAndSignup(etEmail, etPassword1, etPassword2);
+            }
+        });
+        return view;
+    }
+
+    private void validateAndSignup(EditText etEmail, EditText etPassword1, EditText etPassword2) {
+        String email = etEmail.getText().toString().trim();
+        String password1 = etPassword1.getText().toString().trim();
+        String password2 = etPassword2.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if (TextUtils.isEmpty(password1) || password1.length() <= 4) {
+            Toast.makeText(getContext(), "Password must be more than 4 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if (!password1.equals(password2)) {
+            Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Proceed with signup if all validations pass
+        Toast.makeText(getContext(), "Signup Successful", Toast.LENGTH_SHORT).show();
+        // Implement your signup logic here (e.g., save user data, navigate to another fragment)
     }
 }
