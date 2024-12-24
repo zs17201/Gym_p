@@ -67,6 +67,48 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <!-- Email -->
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:background="@drawable/rounded_input"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B0B0B0"
+            android:textSize="16sp"
+            android:inputType="textEmailAddress"/>
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/et_password1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_input"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B0B0B0"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/et_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confrim Password"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_input"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B0B0B0"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
         <!-- First Name -->
         <EditText
             android:id="@+id/et_first_name"
@@ -96,33 +138,7 @@
             android:textSize="16sp"
             android:inputType="textCapWords"/>
 
-        <!-- Email -->
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email Address"
-            android:background="@drawable/rounded_input"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#B0B0B0"
-            android:textSize="16sp"
-            android:inputType="textEmailAddress"/>
 
-        <!-- Password -->
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:background="@drawable/rounded_input"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#B0B0B0"
-            android:textSize="16sp"
-            android:layout_marginBottom="24dp" />
         <Button
             android:id="@+id/btn_signup2"
             android:layout_width="match_parent"
