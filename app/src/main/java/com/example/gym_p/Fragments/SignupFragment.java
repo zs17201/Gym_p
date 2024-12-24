@@ -3,6 +3,7 @@ package com.example.gym_p.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gym_p.Activities.MainActivity;
 import com.example.gym_p.R;
 
 /**
@@ -70,17 +72,26 @@ public class SignupFragment extends Fragment {
         EditText etEmail = view.findViewById(R.id.et_email);
         EditText etPassword1=view.findViewById(R.id.et_password1);
         EditText etPassword2=view.findViewById(R.id.et_password2);
-        Button btnSignup=view.findViewById(R.id.btn_signup);
-        btnSignup.setOnClickListener(new View.OnClickListener(){
+        Button btnreg=view.findViewById(R.id.btn_reg);
+        Button btnlogin = view.findViewById(R.id.btn_login2);
+
+        btnreg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                validateAndSignup(etEmail, etPassword1, etPassword2);
+                validateAndSignup(etEmail, etPassword1, etPassword2,view);
+            }
+        });
+
+        btnlogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_logInFragment);
             }
         });
         return view;
     }
 
-    private void validateAndSignup(EditText etEmail, EditText etPassword1, EditText etPassword2) {
+    private void validateAndSignup(EditText etEmail, EditText etPassword1, EditText etPassword2,View view) {
         String email = etEmail.getText().toString().trim();
         String password1 = etPassword1.getText().toString().trim();
         String password2 = etPassword2.getText().toString().trim();
@@ -103,8 +114,9 @@ public class SignupFragment extends Fragment {
             return;
         }
 
-        // Proceed with signup if all validations pass
-        Toast.makeText(getContext(), "Signup Successful", Toast.LENGTH_SHORT).show();
-        // Implement your signup logic here (e.g., save user data, navigate to another fragment)
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        mainActivity.reg(email,password1);
+        Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_logInFragment);
     }
 }
