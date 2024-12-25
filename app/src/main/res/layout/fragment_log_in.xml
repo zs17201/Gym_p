@@ -58,8 +58,6 @@
 
 
 
-
-
     </LinearLayout>
 
     <!-- Input Fields -->
@@ -75,7 +73,7 @@
 
         <!-- Email -->
         <EditText
-            android:id="@+id/et_email"
+            android:id="@+id/et_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email Address"
@@ -101,7 +99,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="24dp" />
         <Button
-            android:id="@+id/btn_signup2"
+            android:id="@+id/btn_login3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOG IN"
@@ -111,7 +109,6 @@
             android:layout_marginBottom="16dp"
             android:textColor="#121212"
             android:textStyle="bold" />
-
     </LinearLayout>
 
     <!-- Signup Button -->

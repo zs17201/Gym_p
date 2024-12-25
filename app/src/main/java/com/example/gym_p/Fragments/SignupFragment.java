@@ -69,16 +69,19 @@ public class SignupFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_signup, container, false);
-        EditText etEmail = view.findViewById(R.id.et_email);
+        EditText etEmail = view.findViewById(R.id.et_email_reg);
         EditText etPassword1=view.findViewById(R.id.et_password1);
         EditText etPassword2=view.findViewById(R.id.et_password2);
+        EditText et_first_name = view.findViewById(R.id.et_first_name);
+        EditText et_last_name=view.findViewById(R.id.et_last_name);
+
         Button btnreg=view.findViewById(R.id.btn_reg);
         Button btnlogin = view.findViewById(R.id.btn_login2);
 
         btnreg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                validateAndSignup(etEmail, etPassword1, etPassword2,view);
+                validateAndSignup(etEmail, etPassword1, etPassword2,view,et_first_name,et_last_name);
             }
         });
 
@@ -91,11 +94,12 @@ public class SignupFragment extends Fragment {
         return view;
     }
 
-    private void validateAndSignup(EditText etEmail, EditText etPassword1, EditText etPassword2,View view) {
+    private void validateAndSignup(EditText etEmail, EditText etPassword1, EditText etPassword2,View view,EditText et_first_name, EditText et_last_name) {
         String email = etEmail.getText().toString().trim();
         String password1 = etPassword1.getText().toString().trim();
         String password2 = etPassword2.getText().toString().trim();
-
+        String first_name = et_first_name.getText().toString().trim();
+        String last_name = et_last_name.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(getContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
@@ -116,7 +120,8 @@ public class SignupFragment extends Fragment {
 
         MainActivity mainActivity = (MainActivity) getActivity();
 
-        mainActivity.reg(email,password1);
+
+        mainActivity.reg(email,password1,first_name,last_name);
         Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_logInFragment);
     }
 }
