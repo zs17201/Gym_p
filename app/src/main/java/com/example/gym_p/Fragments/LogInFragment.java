@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.gym_p.Activities.MainActivity;
 import com.example.gym_p.R;
 
 /**
@@ -66,6 +69,8 @@ public class LogInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_log_in, container, false);
 
         Button btnSignup=view.findViewById(R.id.btn_signup1);
+        Button btnLogIn = view.findViewById(R.id.btn_login3);
+
 
         btnSignup.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -73,6 +78,41 @@ public class LogInFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_signupFragment);
             }
         });
+
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = ((EditText) getView().findViewById(R.id.et_email_login)).getText().toString();
+                String password = ((EditText) getView().findViewById(R.id.et_password)).getText().toString();
+
+                MainActivity mainActivity = (MainActivity) getActivity();
+
+                mainActivity.login(email, password, new MainActivity.OnLoginResultListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                        mainActivity.getName(new MainActivity.OnGetNameListener() {
+                            @Override
+                            public void onNameReceived(String userName) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("user_name", userName);
+
+                                Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_workoutFragment, bundle);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(), "Invalid Email or Password", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
         return view;
     }
+
+
 }
