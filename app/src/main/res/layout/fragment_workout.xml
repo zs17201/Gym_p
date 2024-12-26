@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Workout Tracker"
+            android:text="@string/workout_tracker"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -32,10 +32,11 @@
         <!-- Profile Button -->
         <ImageButton
             android:id="@+id/profileButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/user"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:contentDescription="Profile" />
     </LinearLayout>
 
     <!-- List Header Row -->
@@ -106,12 +107,13 @@
 
             <ImageButton
                 android:id="@+id/muscle_button"
-                android:layout_width="21dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/muscle"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                app:tint="#FFFFFF" />
+                app:tint="#FFFFFF"
+                android:contentDescription="Current" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,12 +135,13 @@
 
             <ImageButton
                 android:id="@+id/plan_button"
-                android:layout_width="21dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/plan"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                app:tint="#FFFFFF" />
+                app:tint="#FFFFFF"
+                android:contentDescription="Workouts" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -160,12 +163,13 @@
 
             <ImageButton
                 android:id="@+id/setting_button"
-                android:layout_width="21dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/settings"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                app:tint="#FFFFFF" />
+                app:tint="#FFFFFF"
+                android:contentDescription="Settings" />
 
 
             <TextView
