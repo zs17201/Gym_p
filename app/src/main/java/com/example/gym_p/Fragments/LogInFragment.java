@@ -97,7 +97,7 @@ public class LogInFragment extends Fragment {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("user_name", userName);
 
-                                Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_workoutFragment, bundle);
+                                Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_mainPageFragment, bundle);
                             }
                         });
                     }

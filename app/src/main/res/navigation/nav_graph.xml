@@ -12,8 +12,8 @@
             android:id="@+id/action_logInFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_logInFragment_to_workoutFragment"
-            app:destination="@id/workoutFragment" />
+            android:id="@+id/action_logInFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -24,7 +24,7 @@
             app:destination="@id/logInFragment" />
     </fragment>
     <fragment
-        android:id="@+id/workoutFragment"
-        android:name="com.example.gym_p.Fragments.WorkoutFragment"
-        android:label="WorkoutFragment" />
+        android:id="@+id/mainPageFragment"
+        android:name="com.example.gym_p.Fragments.MainPageFragment"
+        android:label="MainPageFragment" />
 </navigation>

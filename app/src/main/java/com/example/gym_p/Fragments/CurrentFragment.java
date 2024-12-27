@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.gym_p.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WorkoutFragment#newInstance} factory method to
+ * Use the {@link CurrentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkoutFragment extends Fragment {
+public class CurrentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +26,7 @@ public class WorkoutFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public WorkoutFragment() {
+    public CurrentFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +36,11 @@ public class WorkoutFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WorkoutFragment.
+     * @return A new instance of fragment CurrentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkoutFragment newInstance(String param1, String param2) {
-        WorkoutFragment fragment = new WorkoutFragment();
+    public static CurrentFragment newInstance(String param1, String param2) {
+        CurrentFragment fragment = new CurrentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,17 +61,6 @@ public class WorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_workout, container, false);
-
-        TextView title = view.findViewById(R.id.listTitle);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            String name = bundle.getString("user_name", "Guest");
-            title.setText(name+", Workouts");
-        }
-
-
-        return view;
+        return inflater.inflate(R.layout.fragment_current, container, false);
     }
 }
