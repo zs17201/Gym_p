@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1B1B1B">
+    android:background="@color/background_color">
 
     <!-- Top Navbar -->
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Workout Tracker"
+            android:text="WELLECOME USER"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -31,9 +31,9 @@
         <!-- Profile Button -->
         <ImageButton
             android:id="@+id/profileButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/user"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:src="@drawable/gymlogo"
             android:scaleType="centerCrop"
             android:contentDescription="Profile" />
     </LinearLayout>
@@ -42,6 +42,7 @@
     <!-- Fragment Container (Dynamic Content) -->
 
     <!-- Bottom Navbar -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:layout_width="0dp"

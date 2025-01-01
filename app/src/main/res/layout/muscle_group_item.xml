@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_background">
+
+    <!-- Muscle Group Image -->
+    <ImageView
+        android:id="@+id/MuscleGroup_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerCrop" />
+
+    <!-- Muscle Group Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/MuscleGroup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Muscle Group Name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/num_exercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercises: 0"
+            android:textColor="#D6D6D6"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+</LinearLayout>

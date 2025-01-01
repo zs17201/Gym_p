@@ -65,32 +65,34 @@ public class MainPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
         // Set up button click listeners
         ImageButton currentButton = view.findViewById(R.id.current_button);
         ImageButton workoutsButton = view.findViewById(R.id.workoutsButton);
         ImageButton settingsButton = view.findViewById(R.id.setting_button);
+        TextView userName = view.findViewById(R.id.topNavbarTitle);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String name = bundle.getString("user_name", "Guest");
+            userName.setText("Welcome, " + name);
+        }
 
-
-        // Handle button clicks
-          currentButton.setOnClickListener(v -> replaceFragment(new CurrentFragment()));
-          workoutsButton.setOnClickListener(v -> replaceFragment(new WorkoutsFragment()));
-          settingsButton.setOnClickListener(v -> replaceFragment(new SettingsFragment()));
-
+        // Handle button clicks and send data to the next fragment
+        currentButton.setOnClickListener(v -> replaceFragment(new CurrentFragment()));
+        workoutsButton.setOnClickListener(v -> replaceFragment(new WorkoutsFragment()));
+        //settingsButton.setOnClickListener(v -> replaceFragment(new SettingsFragment()));
 
         return view;
     }
     // Helper method to replace fragments
-    // Helper method to replace fragments
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getChildFragmentManager(); // Use childFragmentManager
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragmentContainerView, fragment); // Middle content only
+        transaction.replace(R.id.fragmentContainerView, fragment);
         transaction.addToBackStack(null); // Optional: Allows back navigation
         transaction.commit();
     }
-
-
 }

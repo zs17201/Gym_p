@@ -3,12 +3,20 @@ package com.example.gym_p.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import com.example.gym_p.Classes.MuscleGroup;
+import com.example.gym_p.Classes.MuscleGroupAdapter;
+import com.example.gym_p.Classes.MuscleGroupData;
 import com.example.gym_p.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,11 @@ public class WorkoutsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerViewMuscleGroups;
+
+    private ArrayList<MuscleGroup> MuscleGroupList;
+    private MuscleGroupAdapter muscleGroupAdapter;
 
     public WorkoutsFragment() {
         // Required empty public constructor
@@ -61,6 +74,53 @@ public class WorkoutsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workouts, container, false);
+        View view = inflater.inflate(R.layout.fragment_workouts, container, false);
+
+        recyclerViewMuscleGroups = view.findViewById(R.id.RecycleViewMuscle);
+        SearchView searchView = view.findViewById(R.id.searchView);
+        resetList();
+
+        // Add search functionality
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterList(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
+
+
+
+        return view;
     }
+
+
+    private void resetList() {
+        // קבלת רשימת קבוצות השרירים
+        MuscleGroupList = new ArrayList<>(MuscleGroupData.getMuscleGroups());
+
+        // יצירת והגדרת מתאם
+        muscleGroupAdapter = new MuscleGroupAdapter(getContext(), MuscleGroupList,getParentFragmentManager());
+        recyclerViewMuscleGroups.setAdapter(muscleGroupAdapter);
+
+        // הגדרת LayoutManager
+        recyclerViewMuscleGroups.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void filterList(String query) {
+        ArrayList<MuscleGroup> filteredList = new ArrayList<>();
+        for (MuscleGroup muscleGroup : MuscleGroupList) {
+            if (muscleGroup.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(muscleGroup);
+            }
+        }
+        muscleGroupAdapter.updateList(filteredList);
+    }
+
 }
