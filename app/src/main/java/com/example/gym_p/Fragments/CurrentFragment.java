@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.gym_p.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +67,51 @@ public class CurrentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current, container, false);
+        View view = inflater.inflate(R.layout.fragment_current, container, false);
+        Calendar calendar = Calendar.getInstance();
+
+        // Define the date format: day/month/year (e.g., 28/12/24)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+        String formattedDate = dateFormat.format(calendar.getTime());
+
+        // Get the day of the week (e.g., Tuesday)
+        String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+        // Combine the formatted date and day of the week
+        String workoutTitleText = formattedDate + " - " + dayOfWeek;
+
+        // Reference the TextView and set the workout title dynamically
+        TextView workoutTitle = view.findViewById(R.id.workoutTitle);
+        workoutTitle.setText(workoutTitleText);
+
+
+        // Reference the LinearLayout container where items will be added
+        LinearLayout workoutListContainer = view.findViewById(R.id.workoutListContainer);
+
+        // Example data for dynamic workout items
+        String[] muscleGroups = {"Hamstrings", "Quads", "Glutes"};
+        String[] exercises = {"Dumbbell Stiff Legged Deadlift", "Squat", "Hip Thrust"};
+
+        // Loop through the data and add items dynamically
+        for (int i = 0; i < muscleGroups.length; i++) {
+            // Inflate the workout_item layout
+            View workoutItem = inflater.inflate(R.layout.workout_item, workoutListContainer, false);
+
+            // Populate the views inside the workout item
+            TextView muscleGroup = workoutItem.findViewById(R.id.muscleGroup);
+            TextView exerciseName = workoutItem.findViewById(R.id.exerciseName);
+
+            // Set data dynamically
+            muscleGroup.setText(muscleGroups[i]);
+            exerciseName.setText(exercises[i]);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) workoutItem.getLayoutParams();
+            params.topMargin = 16;  // You can adjust this value as needed
+            workoutItem.setLayoutParams(params);
+
+            // Add the inflated view to the container
+            workoutListContainer.addView(workoutItem);
+        }
+
+     return view;
     }
 }
