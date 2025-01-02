@@ -3,6 +3,9 @@ package com.example.gym_p.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +13,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gym_p.Classes.CurrentAdapter;
+import com.example.gym_p.Classes.Exercise;
+import com.example.gym_p.Classes.WorkoutViewModel;
 import com.example.gym_p.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -31,6 +38,7 @@ public class CurrentFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private WorkoutViewModel workoutViewModel;
 
     public CurrentFragment() {
         // Required empty public constructor
@@ -86,31 +94,14 @@ public class CurrentFragment extends Fragment {
 
 
         // Reference the LinearLayout container where items will be added
-        LinearLayout workoutListContainer = view.findViewById(R.id.workoutListContainer);
+        RecyclerView workoutRecyclerView = view.findViewById(R.id.workoutRecyclerView);
 
-        // Example data for dynamic workout items
-        String[] muscleGroups = {"Hamstrings", "Quads", "Glutes"};
-        String[] exercises = {"Dumbbell Stiff Legged Deadlift", "Squat", "Hip Thrust"};
 
-        // Loop through the data and add items dynamically
-        for (int i = 0; i < muscleGroups.length; i++) {
-            // Inflate the workout_item layout
-            View workoutItem = inflater.inflate(R.layout.workout_item, workoutListContainer, false);
-
-            // Populate the views inside the workout item
-            TextView muscleGroup = workoutItem.findViewById(R.id.muscleGroup);
-            TextView exerciseName = workoutItem.findViewById(R.id.exerciseName);
-
-            // Set data dynamically
-            muscleGroup.setText(muscleGroups[i]);
-            exerciseName.setText(exercises[i]);
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) workoutItem.getLayoutParams();
-            params.topMargin = 16;  // You can adjust this value as needed
-            workoutItem.setLayoutParams(params);
-
-            // Add the inflated view to the container
-            workoutListContainer.addView(workoutItem);
-        }
+        workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+        List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
+        CurrentAdapter adapter = new CurrentAdapter(selectedExercises);
+        workoutRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        workoutRecyclerView.setAdapter(adapter);
 
      return view;
     }

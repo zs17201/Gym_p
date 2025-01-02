@@ -4,9 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gym_p.R;
@@ -37,6 +41,16 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         holder.exerciseName.setText(exercise.getName());
         holder.exerciseDescription.setText(exercise.getDescription());
         holder.exerciseImage.setImageResource(exercise.getImageResId());
+
+        holder.addButton.setOnClickListener(view -> {
+
+            WorkoutViewModel viewModel = new ViewModelProvider((AppCompatActivity) context).get(WorkoutViewModel.class);
+            viewModel.addExercise(exercise);
+
+
+            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            fragmentManager.popBackStack();
+        });
     }
 
     @Override
@@ -48,11 +62,14 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         TextView exerciseName, exerciseDescription;
         ImageView exerciseImage;
 
+        Button addButton;
+
         public ExerciseViewHolder(View itemView) {
             super(itemView);
             exerciseName = itemView.findViewById(R.id.exercise_name);
             exerciseDescription = itemView.findViewById(R.id.exercise_description);
             exerciseImage = itemView.findViewById(R.id.exercise_image);
+            addButton = itemView.findViewById(R.id.add_to_workout_button);
         }
     }
 }
