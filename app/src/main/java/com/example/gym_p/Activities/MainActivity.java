@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.Navigation;
 
+import com.example.gym_p.Classes.Exercise;
 import com.example.gym_p.Classes.User;
 import com.example.gym_p.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -143,6 +144,26 @@ public class MainActivity extends AppCompatActivity {
 
     public interface OnGetNameListener {
         void onNameReceived(String userName);
+    }
+
+    public void addExerciseToDatabase(Exercise exercise, String email, String date) {
+        String sanitizedEmail = email.replace(".", ",");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("usersWorkouts").child(sanitizedEmail);
+        DatabaseReference dateRef = userRef.child(date);
+
+        String exerciseName = exercise.getName();
+        if (exerciseName != null && !exerciseName.isEmpty()) {
+            dateRef.child(exerciseName).setValue(exercise)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Exercise added to database", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to add exercise: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            Toast.makeText(this, "Exercise name cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

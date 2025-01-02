@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -46,8 +47,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
             WorkoutViewModel viewModel = new ViewModelProvider((AppCompatActivity) context).get(WorkoutViewModel.class);
             viewModel.addExercise(exercise);
-
-
+            Toast.makeText(holder.itemView.getContext(), "Exercise added to your current", Toast.LENGTH_SHORT).show();
             FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
             fragmentManager.popBackStack();
         });

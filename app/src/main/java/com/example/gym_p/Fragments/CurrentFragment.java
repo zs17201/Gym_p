@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gym_p.Classes.CurrentAdapter;
 import com.example.gym_p.Classes.Exercise;
@@ -77,20 +78,25 @@ public class CurrentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_current, container, false);
         Calendar calendar = Calendar.getInstance();
+        String email = "";
 
-        // Define the date format: day/month/year (e.g., 28/12/24)
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
         String formattedDate = dateFormat.format(calendar.getTime());
 
-        // Get the day of the week (e.g., Tuesday)
+// Get the day of the week (e.g., "Tuesday")
         String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
-        // Combine the formatted date and day of the week
-        String workoutTitleText = formattedDate + " - " + dayOfWeek;
+// Combine the formatted date and day of the week
+        String workoutTitleText = "Your workout for today - " + formattedDate + " - " + dayOfWeek;
 
-        // Reference the TextView and set the workout title dynamically
+// Set greeting message and workout title
         TextView workoutTitle = view.findViewById(R.id.workoutTitle);
         workoutTitle.setText(workoutTitleText);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            email = bundle.getString("user_email");
+        }
 
 
         // Reference the LinearLayout container where items will be added
@@ -99,7 +105,7 @@ public class CurrentFragment extends Fragment {
 
         workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
         List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
-        CurrentAdapter adapter = new CurrentAdapter(selectedExercises);
+        CurrentAdapter adapter = new CurrentAdapter(selectedExercises,email);
         workoutRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         workoutRecyclerView.setAdapter(adapter);
 
