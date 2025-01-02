@@ -8,18 +8,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="16dp">
 
-        <!-- Header -->
+        <!-- Header Section -->
         <TextView
             android:id="@+id/settings_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⚙️ Settings"
-            android:textSize="24sp"
-            android:textColor="@color/white"
+            android:text="⚙ Settings"
+            android:textSize="28sp"
+
             android:fontFamily="sans-serif-medium"
-            android:paddingBottom="16dp" />
+            android:textStyle="bold"
+            android:letterSpacing="0.5"
+            android:paddingBottom="24dp"
+            android:gravity="center"/>
 
         <!-- Profile Section -->
         <LinearLayout
@@ -27,34 +32,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="8dp"
-
+            android:padding="16dp"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:layout_marginTop="8dp"
+            android:elevation="2dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-
-                android:contentDescription="Profile Icon"
-                android:tint="@color/white" />
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="Profile Icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Edit Profile"
-                android:textSize="16sp"
                 android:paddingStart="16dp"
-                android:textColor="@color/white" />
+                android:text="Delete Profile"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-
-                android:contentDescription="Arrow Icon"
-                />
+                android:src="@drawable/ic_arrow_right"
+                android:contentDescription="Arrow Icon" />
         </LinearLayout>
+
+
 
         <!-- Notifications Section -->
         <LinearLayout
@@ -62,70 +68,69 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="8dp"
-
+            android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:elevation="2dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-
-                android:contentDescription="Notifications Icon"
-                 />
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_notifications"
+                android:contentDescription="Notifications Icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Manage Notifications"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:paddingStart="16dp"
-                android:textColor="@color/white" />
+                android:paddingStart="16dp" />
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-
-                android:contentDescription="Arrow Icon"
-                 />
+                android:src="@drawable/ic_arrow_right"
+                android:contentDescription="Arrow Icon" />
         </LinearLayout>
 
-        <!-- Equipment Section -->
+
+
+        <!-- Goal Tracking Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="8dp"
-
+            android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="8dp">
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginTop="8dp"
+            android:elevation="2dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-
-                android:contentDescription="Equipment Icon"
-              />
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_goal_tracking"
+                android:contentDescription="Goal Tracking Icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Edit Equipment"
+                android:text="Goal Tracking"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:paddingStart="16dp"
-                android:textColor="@color/white" />
+                android:paddingStart="16dp" />
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-
-                android:contentDescription="Arrow Icon"
-                 />
+                android:src="@drawable/ic_arrow_right"
+                android:contentDescription="Arrow Icon" />
         </LinearLayout>
 
     </LinearLayout>

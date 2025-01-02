@@ -96,7 +96,7 @@ public class LogInFragment extends Fragment {
                             public void onNameReceived(String userName) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("user_name", userName);
-
+                                bundle.putString("user_email", email);
                                 Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_mainPageFragment, bundle);
                             }
                         });

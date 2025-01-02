@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gym_p.R;
 
@@ -29,6 +30,7 @@ public class MainPageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String email;
 
     public MainPageFragment() {
         // Required empty public constructor
@@ -77,18 +79,27 @@ public class MainPageFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String name = bundle.getString("user_name", "Guest");
-            userName.setText("Welcome, " + name);
+            userName.setText("Hellow, " + name);
+            email = bundle.getString("user_email");
         }
 
         // Handle button clicks and send data to the next fragment
-        currentButton.setOnClickListener(v -> replaceFragment(new CurrentFragment()));
-        workoutsButton.setOnClickListener(v -> replaceFragment(new WorkoutsFragment()));
-        //settingsButton.setOnClickListener(v -> replaceFragment(new SettingsFragment()));
+        currentButton.setOnClickListener(v -> replaceFragment(new CurrentFragment(),email));
+        workoutsButton.setOnClickListener(v -> replaceFragment(new WorkoutsFragment(),email));
+        settingsButton.setOnClickListener(v -> replaceFragment(new SettingsFragment(),email));
 
         return view;
     }
     // Helper method to replace fragments
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String email) {
+
+        // Create a Bundle to pass data
+        Bundle bundle = new Bundle();
+        bundle.putString("user_email", email); // Add the email to the bundle
+
+        // Set the arguments to the fragment
+        fragment.setArguments(bundle);
+
         FragmentManager fragmentManager = getChildFragmentManager(); // Use childFragmentManager
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragmentContainerView, fragment);
