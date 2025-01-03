@@ -44,8 +44,13 @@ public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.WorkoutV
         holder.exerciseDescription.setText(exercise.getDescription());
 
         holder.removeButton.setOnClickListener(v -> {
-            exerciseList.remove(position);
-            notifyItemRemoved(position);
+            if(position >= 0 && position < exerciseList.size()){
+                exerciseList.remove(position);
+                notifyItemRemoved(position);
+                for (int i = position; i < exerciseList.size(); i++) {
+                    notifyItemChanged(i);
+                }
+            }
         });
 
         holder.addSet.setOnClickListener(v -> {
@@ -62,8 +67,13 @@ public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.WorkoutV
                 Toast.makeText(holder.itemView.getContext(), "Finish exercise and save set", Toast.LENGTH_SHORT).show();
             }
             AddEx(holder,exercise);
-            exerciseList.remove(position);
-            notifyItemRemoved(position);
+            if(position >= 0 && position < exerciseList.size()){
+                exerciseList.remove(position);
+                notifyItemRemoved(position);
+                for (int i = position; i < exerciseList.size(); i++) {
+                    notifyItemChanged(i);
+                }
+            }
         });
     }
 

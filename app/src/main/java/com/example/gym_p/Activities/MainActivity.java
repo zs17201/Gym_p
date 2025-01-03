@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.gym_p.Classes.Exercise;
 import com.example.gym_p.Classes.User;
+import com.example.gym_p.Classes.WorkoutViewModel;
 import com.example.gym_p.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -166,4 +170,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void AddFavWorkout(String email) {
+
+        String sanitizedEmail = email.replace(".", ",");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("usersWorkouts").child(sanitizedEmail).child("Favorite_Workouts");
+        WorkoutViewModel workoutViewModel = new ViewModelProvider(this).get(WorkoutViewModel.class);
+        List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
+
+        if (selectedExercises == null || selectedExercises.isEmpty()) {
+            Toast.makeText(this, "No exercises selected.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        myRef.setValue(selectedExercises).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "Data saved successfully.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error saving user data.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
