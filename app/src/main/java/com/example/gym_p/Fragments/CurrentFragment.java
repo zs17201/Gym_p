@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gym_p.Activities.MainActivity;
 import com.example.gym_p.Classes.CurrentAdapter;
 import com.example.gym_p.Classes.Exercise;
 import com.example.gym_p.Classes.WorkoutViewModel;
@@ -83,14 +86,12 @@ public class CurrentFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
         String formattedDate = dateFormat.format(calendar.getTime());
 
-// Get the day of the week (e.g., "Tuesday")
         String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
-// Combine the formatted date and day of the week
         String workoutTitleText = "Your workout for today - " + formattedDate + " - " + dayOfWeek;
 
-// Set greeting message and workout title
         TextView workoutTitle = view.findViewById(R.id.workoutTitle);
+        ImageButton AddFavButton = view.findViewById(R.id.AddFavoriteButton);
         workoutTitle.setText(workoutTitleText);
 
         Bundle bundle = getArguments();
@@ -98,10 +99,18 @@ public class CurrentFragment extends Fragment {
             email = bundle.getString("user_email");
         }
 
+        String finalEmail = email;
+        AddFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.AddFavWorkout(finalEmail);
+            }
+        });
+
 
         // Reference the LinearLayout container where items will be added
         RecyclerView workoutRecyclerView = view.findViewById(R.id.workoutRecyclerView);
-
 
         workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
         List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
