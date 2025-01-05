@@ -3,28 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:background="#121212"
+    android:padding="16dp">
 
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/headerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Your Workout"
+        android:textSize="24sp"
+        android:textColor="#79E444"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold" />
 
+    <!-- Search View -->
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search muscle groups"
-        style="@style/SearchViewStyle"
-        android:textColorHint="#79E444"
-        android:layout_marginBottom="8dp" />
+        android:iconifiedByDefault="false"
+        android:layout_marginBottom="16dp" />
 
-    <!-- RecyclerView in the middle -->
-
-    <!-- Log out Button at the bottom -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleViewMuscle"
+        android:id="@+id/recyclerViewMuscle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scrollbars="vertical" />
+        android:clipToPadding="false"
+        android:padding="8dp" />
 
 </LinearLayout>

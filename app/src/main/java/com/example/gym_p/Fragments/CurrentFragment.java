@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -92,6 +93,12 @@ public class CurrentFragment extends Fragment {
 
         TextView workoutTitle = view.findViewById(R.id.workoutTitle);
         ImageButton AddFavButton = view.findViewById(R.id.AddFavoriteButton);
+        Button closeInputSectionButton = view.findViewById(R.id.closeInputSectionButton);
+        LinearLayout inputSectionContainer = view.findViewById(R.id.inputSectionContainer);
+
+        closeInputSectionButton.setOnClickListener(v -> {
+            inputSectionContainer.setVisibility(View.GONE);
+        });
         workoutTitle.setText(workoutTitleText);
 
         Bundle bundle = getArguments();
@@ -103,8 +110,34 @@ public class CurrentFragment extends Fragment {
         AddFavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.AddFavWorkout(finalEmail);
+
+                workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+                List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
+                if (selectedExercises.isEmpty()) {
+                    Toast.makeText(getContext(), "Your workout empty", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Button saveWorkoutButton = view.findViewById(R.id.saveWorkoutButton);
+                    EditText workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
+                    inputSectionContainer.setVisibility(View.VISIBLE);
+
+                    saveWorkoutButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String workout_name = ((EditText) workoutNameEditText).getText().toString();
+                            if (workout_name.isEmpty()) {
+                                Toast.makeText(getContext(), "Please enter workout name", Toast.LENGTH_SHORT).show();
+                            } else {
+                                MainActivity mainActivity = (MainActivity) getActivity();
+                                mainActivity.AddFavWorkout(finalEmail, workout_name);
+                                inputSectionContainer.setVisibility(View.GONE);
+                            }
+
+                        }
+                    });
+
+
+                }
             }
         });
 
@@ -120,4 +153,6 @@ public class CurrentFragment extends Fragment {
 
      return view;
     }
+
+
 }

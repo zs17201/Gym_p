@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="8dp">
+
+    <!-- תמונת האימון -->
+    <ImageView
+        android:id="@+id/exerciseImageCal"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_sample"
+        />
+
+    <!-- טקסטים -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- שם האימון -->
+        <TextView
+            android:id="@+id/exerciseNameCal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercise Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <!-- תיאור האימון -->
+        <TextView
+            android:id="@+id/exerciseDescriptionCal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercise Description"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <!-- סטים -->
+    <TextView
+        android:id="@+id/exerciseSetsCal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4 Sets"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_gravity="center_vertical" />
+
+</LinearLayout>

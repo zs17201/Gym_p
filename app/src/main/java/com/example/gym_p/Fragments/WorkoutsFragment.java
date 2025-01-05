@@ -76,7 +76,7 @@ public class WorkoutsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_workouts, container, false);
 
-        recyclerViewMuscleGroups = view.findViewById(R.id.RecycleViewMuscle);
+        recyclerViewMuscleGroups = view.findViewById(R.id.recyclerViewMuscle);
         SearchView searchView = view.findViewById(R.id.searchView);
         resetList();
 

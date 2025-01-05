@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void reg(String email, String pass,String first_name,String last_name) {
+    public void reg(String email, String pass, String first_name, String last_name) {
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(MainActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        addDATA(email, pass,first_name,last_name); // Pass data to addDATA
+                        addDATA(email, pass, first_name, last_name); // Pass data to addDATA
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             Toast.makeText(MainActivity.this, "Email already in use. Try logging in.", Toast.LENGTH_SHORT).show();
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void addDATA(String email, String pass,String first_name, String last_name) {
+    private void addDATA(String email, String pass, String first_name, String last_name) {
 
 
         String sanitizedEmail = email.replace(".", ",");
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(String email, String password, OnLoginResultListener listener) {
 
-        if (email.equals("") ||  password.equals("")){
+        if (email.equals("") || password.equals("")) {
             listener.onFailure();
             return;
         }
@@ -170,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void AddFavWorkout(String email) {
+    public void AddFavWorkout(String email, String workout_name) {
 
         String sanitizedEmail = email.replace(".", ",");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("usersWorkouts").child(sanitizedEmail).child("Favorite_Workouts");
+        DatabaseReference myRef = database.getReference("usersWorkouts").child(sanitizedEmail).child("Favorite_Workouts").child(workout_name);
         WorkoutViewModel workoutViewModel = new ViewModelProvider(this).get(WorkoutViewModel.class);
         List<Exercise> selectedExercises = workoutViewModel.getSelectedExercises();
 
@@ -190,5 +191,63 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error saving user data.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onAddToCurrentWorkout(String workout_name, String email, final DataFetchedCallback callback) {
+        final List<Exercise> currentWorkoutExercises = new ArrayList<>();
+
+        // Reference to the "Current_Workout" section in Firebase
+        DatabaseReference currentWorkoutRef = FirebaseDatabase.getInstance()
+                .getReference("usersWorkouts")
+                .child(email.replace(".", ","))  // Firebase email formatting
+                .child("Favorite_Workouts")
+                .child(workout_name); // The workout name
+
+        // Listen for the data in the "workout_name" node
+        currentWorkoutRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Loop through all the exercises under the workout name
+                for (DataSnapshot exerciseSnapshot : snapshot.getChildren()) {
+                    // Deserialize the exercise object
+                    Exercise exercise = exerciseSnapshot.getValue(Exercise.class);
+                    if (exercise != null) {
+                        currentWorkoutExercises.add(exercise);  // Add exercise to the list
+                    }
+                }
+                // Now notify the caller (MainActivity) that data is fetched
+                callback.onDataFetched(currentWorkoutExercises);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle any errors that occur while retrieving the data
+                Toast.makeText(MainActivity.this, "Failed to load exercises", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
+    public void onDeleteWorkout(String workout_name, String email){
+
+        DatabaseReference favoriteWorkoutsRef = FirebaseDatabase.getInstance()
+                .getReference("usersWorkouts")
+                .child(email.replace(".", ",")) // Handle email format for Firebase keys
+                .child("Favorite_Workouts");  // Section for favorite workouts
+
+        // Remove workout from favorites
+        favoriteWorkoutsRef.child(workout_name).removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(MainActivity.this, workout_name + " deleted from favorites.", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(MainActivity.this, "Failed to delete workout from favorites.", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    public interface DataFetchedCallback {
+        void onDataFetched(List<Exercise> exercises);
     }
 }
