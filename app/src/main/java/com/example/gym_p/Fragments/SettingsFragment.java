@@ -3,10 +3,14 @@ package com.example.gym_p.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.gym_p.R;
 
@@ -25,6 +29,7 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String email = "";
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -61,6 +66,46 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        ImageButton ImButtonCalendar = view.findViewById(R.id.ImButtonCalendar);
+        ImageButton displayFavorite = view.findViewById(R.id.ButtonDisplayFavorites);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            email = bundle.getString("user_email");
+        }
+
+        ImButtonCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new ManageWorkouts_Fragment(),email);
+            }
+        });
+
+        displayFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new FavoritesFragment(),email);
+            }
+        });
+
+        return view;
+    }
+
+    private void replaceFragment(Fragment fragment, String email) {
+
+        // Create a Bundle to pass data
+        Bundle bundle = new Bundle();
+        bundle.putString("user_email", email); // Add the email to the bundle
+
+        // Set the arguments to the fragment
+        fragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getFragmentManager(); // Use childFragmentManager
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragmentContainerView, fragment);
+        transaction.addToBackStack(null); // Optional: Allows back navigation
+        transaction.commit();
     }
 }

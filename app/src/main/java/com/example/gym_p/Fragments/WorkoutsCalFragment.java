@@ -9,40 +9,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.gym_p.Classes.DayWorkoutAdapter;
 import com.example.gym_p.Classes.Exercise;
-import com.example.gym_p.Classes.ExerciseAdapter;
-import com.example.gym_p.Classes.MuscleGroupAdapter;
-import com.example.gym_p.Classes.MuscleGroupData;
 import com.example.gym_p.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ExerciseFragment#newInstance} factory method to
+ * Use the {@link WorkoutsCalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExerciseFragment extends Fragment {
+public class WorkoutsCalFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private RecyclerView recyclerViewExercises;
-    private ExerciseAdapter exerciseAdapter;
-    private static final String ARG_EXERCISES = "exercises";
-    private ArrayList<Exercise> exerciseList;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public ExerciseFragment() {
+    private RecyclerView recyclerView;
+    private DayWorkoutAdapter adapter;
+    private List<Exercise> exercises;
+
+    public WorkoutsCalFragment() {
         // Required empty public constructor
     }
-
 
     /**
      * Use this factory method to create a new instance of
@@ -50,40 +48,24 @@ public class ExerciseFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExerciseFragment.
+     * @return A new instance of fragment WorkoutsCalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    /*public static ExerciseFragment newInstance(String param1, String param2) {
-        ExerciseFragment fragment = new ExerciseFragment();
+    public static WorkoutsCalFragment newInstance(String param1, String param2) {
+        WorkoutsCalFragment fragment = new WorkoutsCalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }*/
-
-    public static ExerciseFragment newInstance(ArrayList<Exercise> exercises) {
-        ExerciseFragment fragment = new ExerciseFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_EXERCISES, exercises); // מעביר את הרשימה כ-Serializable
-        fragment.setArguments(args);
-        return fragment;
     }
-
-   /* @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            exerciseList = (ArrayList<Exercise>) getArguments().getSerializable(ARG_EXERCISES);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -91,16 +73,26 @@ public class ExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_exercise, container, false);
 
-        recyclerViewExercises = view.findViewById(R.id.recyclerViewExercises);
+        View view = inflater.inflate(R.layout.fragment_workouts_cal, container, false);
 
+        TextView textViewWorkoutDate = view.findViewById(R.id.textViewWorkoutDate);
+        recyclerView = view.findViewById(R.id.recyclerViewWorkoutDetails);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        exerciseAdapter = new ExerciseAdapter(getContext(), exerciseList);
-        recyclerViewExercises.setAdapter(exerciseAdapter);
+        exercises = new ArrayList<>();
+        adapter = new DayWorkoutAdapter(exercises);
+        recyclerView.setAdapter(adapter);
 
-        recyclerViewExercises.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (getArguments() != null) {
+            String workoutDate = getArguments().getString("day");
+            textViewWorkoutDate.setText("Workout Date: " + workoutDate);
 
+            exercises = (List<Exercise>) getArguments().getSerializable("exercises");
+            if (exercises != null) {
+                adapter.setExercises(exercises);
+            }
+        }
 
         return view;
     }

@@ -10,6 +10,10 @@ public class Exercise {
     List<Set> sets;
     private int imageResId;
 
+    public Exercise() {
+
+    }
+
     public Exercise(String name,String description ,int imageResId) {
         this.name = name;
         this.imageResId = imageResId;

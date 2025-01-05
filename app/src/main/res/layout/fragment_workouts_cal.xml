@@ -1,0 +1,41 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1E1E1E"
+    android:padding="16dp"
+    tools:context=".Fragments.WorkoutsCalFragment">
+
+    <!-- כותרת עם תאריך -->
+    <TextView
+        android:id="@+id/textViewWorkoutDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Workout Date: [DATE]"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#3E3E3E"
+        android:padding="12dp"
+        android:elevation="4dp" />
+
+    <!-- קו מפריד -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="8dp"
+        android:background="#757575" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewWorkoutDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#292929"
+        android:scrollbars="vertical"
+        android:padding="8dp" />
+</LinearLayout>
