@@ -1,5 +1,7 @@
 package com.example.gym_p.Activities;
 
+import static java.security.AccessController.getContext;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -250,4 +252,95 @@ public class MainActivity extends AppCompatActivity {
     public interface DataFetchedCallback {
         void onDataFetched(List<Exercise> exercises);
     }
+
+    public void deleteAccount(String email){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null && user.getEmail().equals(email)) {
+            user.delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d("DeleteAccount", "User deleted successfully from Firebase Authentication");
+                } else {
+                    Log.e("DeleteAccount", "Error deleting user from Firebase Authentication", task.getException());
+                }
+            });
+        } else {
+            Log.e("DeleteAccount", "User not found or email mismatch");
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
+
+        String sanitizedEmail = email.replace(".", ",");
+        usersRef.child(sanitizedEmail).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("DeleteAccount", "User data deleted successfully from Realtime Database.");
+            } else {
+                Log.e("DeleteAccount", "Error deleting user data from Realtime Database", task.getException());
+            }
+        });
+
+        usersRef = database.getReference("usersWorkouts");
+
+        usersRef.child(sanitizedEmail).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("DeleteAccount", "User data deleted successfully from Realtime Database.");
+            } else {
+                Log.e("DeleteAccount", "Error deleting user data from Realtime Database", task.getException());
+            }
+        });
+    }
+
+    public void changePass(String email, String newPassword){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            user.updatePassword(newPassword)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d("ChangePassword", "Password updated successfully");
+                            Toast.makeText(MainActivity.this, "Password updated successfully.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("ChangePassword", "Error updating password", task.getException());
+                            Toast.makeText(MainActivity.this, "Failed to update password.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Log.e("ChangePassword", "User not logged in.");
+            Toast.makeText(MainActivity.this, "User is not logged in.", Toast.LENGTH_SHORT).show();
+        }
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
+        String sanitizedEmail = email.replace(".", ",");
+        usersRef.child(sanitizedEmail).child("pass").setValue(newPassword)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("ChangePassword", "Password updated successfully in Realtime Database.");
+                        Toast.makeText(MainActivity.this, "Password updated successfully.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("ChangePassword", "Error updating password in Realtime Database", task.getException());
+                        Toast.makeText(MainActivity.this, "Failed to update password.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void changeName(String email, String new_name){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users");
+        String sanitizedEmail = email.replace(".", ",");
+        usersRef.child(sanitizedEmail).child("first_name").setValue(new_name)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("ChangeName", "Name updated successfully in Realtime Database.");
+                        Toast.makeText(MainActivity.this, "Name updated successfully.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("ChangeName", "Error updating name in Realtime Database", task.getException());
+                        Toast.makeText(MainActivity.this, "Failed to update name.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

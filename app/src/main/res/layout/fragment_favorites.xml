@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#1B1B1B">
+    android:background="@color/background_color">
 
     <!-- Title -->
     <TextView
@@ -34,7 +34,7 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"
         android:padding="8dp"
-        android:background="#292929"
+        android:background="#1B1B1B"
         android:layout_marginBottom="8dp" />
 
 </LinearLayout>

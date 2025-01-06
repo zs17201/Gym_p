@@ -4,4 +4,26 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#1B1B1B</color>
     <color name="workout_day_color">#FF6200EE</color>
+    <color name="colorPrimary">#6200EE</color>
+
+    <color name="primary_color">#79E444</color> <!-- Orange shade for a dynamic and energetic feel -->
+
+
+
+    <!-- Background Color: A dark, sophisticated color for the app's theme -->
+    <color name="background_color_setting">#121212</color> <!-- Dark grey background for a sleek, professional look -->
+
+    <!-- White: Used for text and icons for high contrast -->
+
+    <!-- Text colors -->
+    <color name="text_primary">#F1F1F1</color> <!-- Light text for primary content -->
+    <color name="text_secondary">#D3D3D3</color> <!-- Secondary text for less important info -->
+
+    <color name="colorSecondary">#76FF03</color> <!-- Bright green for the current day -->
+    <color name="colorAccent">#03A9F4</color> <!-- Blue for focus and determination -->
+
+    <!-- Background and Text Colors -->
+    <color name="calendarBackground">#212121</color> <!-- Dark gray background -->
+    <color name="calendarTextColor">#FFFFFF</color> <!-- White text color for days -->
+    <color name="weekdayTextColor">#B0BEC5</color> <!-- Light gray for weekdays -->
 </resources>

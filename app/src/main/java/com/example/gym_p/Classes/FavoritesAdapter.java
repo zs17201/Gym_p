@@ -61,7 +61,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                             // Handle the exercise list after data is fetched
                             viewModel.clearExercises();
                             viewModel.addExercises(exercises);
-                            Toast.makeText(holder.itemView.getContext(), "Size: " + exercises.size(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(holder.itemView.getContext(), "Add to your current", Toast.LENGTH_SHORT).show();
                             FavWorkoutExercises.clear();
                             FavWorkoutExercises.addAll(exercises); // Now you can use the data
 

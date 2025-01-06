@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#1B1B1B"
     android:padding="16dp">
@@ -18,14 +19,19 @@
         android:gravity="center"
         android:layout_marginBottom="16dp" />
 
-    <!-- CalendarView -->
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:dateTextAppearance="?android:attr/textAppearanceMedium"
-        android:weekDayTextAppearance="?android:attr/textAppearanceSmall"
-        android:background="@drawable/calendar_background" />
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/calendar_background"
+        android:padding="16dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"
+
+         />
+
+
+
 
 </LinearLayout>

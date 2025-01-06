@@ -119,8 +119,6 @@ public class SignupFragment extends Fragment {
         }
 
         MainActivity mainActivity = (MainActivity) getActivity();
-
-
         mainActivity.reg(email,password1,first_name,last_name);
         Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_logInFragment);
     }

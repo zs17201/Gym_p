@@ -35,7 +35,6 @@
         android:id="@+id/recyclerViewWorkoutDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#292929"
         android:scrollbars="vertical"
         android:padding="8dp" />
 </LinearLayout>

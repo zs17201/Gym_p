@@ -3,46 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/card_background">
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/card_background"
+    android:elevation="6dp"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:layout_marginHorizontal="8dp">
 
     <!-- Muscle Group Image -->
     <ImageView
         android:id="@+id/MuscleGroup_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="12dp"
-        android:scaleType="centerCrop" />
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Muscle Group Image"
+        android:clipToOutline="true" />
 
     <!-- Muscle Group Details -->
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center">
 
+        <!-- Muscle Group Title -->
         <TextView
             android:id="@+id/MuscleGroup_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Muscle Group Name"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textColor="#FFEB3B"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:ellipsize="end"
-            android:maxLines="1" />
-
-        <TextView
-            android:id="@+id/num_exercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exercises: 0"
-            android:textColor="#D6D6D6"
-            android:textSize="14sp"
-            android:ellipsize="end"
             android:maxLines="1"
-            android:layout_marginTop="4dp" />
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
     </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="#212121">
+
+    <!-- App Icon -->
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/gymlogo"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/gymlogo"
+        android:padding="16dp"
+        android:elevation="4dp" />
+
+    <!-- Slogan -->
+    <TextView
+        android:id="@+id/sloganText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Achieve Your Fitness Goals!"
+        android:textColor="#FF5722"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Sub-slogan -->
+    <TextView
+        android:id="@+id/subSloganText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your ultimate training companion."
+        android:textColor=" #B0BEC5"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:fontFamily="sans-serif-light"
+        android:lineSpacingExtra="4dp" />
+</LinearLayout>

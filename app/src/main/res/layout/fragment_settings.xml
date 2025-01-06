@@ -3,22 +3,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_color"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <!-- Header Section -->
     <TextView
-        android:id="@+id/settings_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="⚙ Settings"
-        android:textSize="28sp"
-        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textColor="@color/primary_color"
         android:fontFamily="sans-serif-medium"
         android:textStyle="bold"
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.5"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="24dp" />
 
     <!-- Profile Section -->
     <LinearLayout
@@ -27,33 +26,38 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_card_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
+        android:padding="18dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:elevation="6dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_profile"
             android:contentDescription="Profile Icon"
-             />
+            android:layout_marginEnd="16dp"
+            />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingStart="12dp"
             android:text="Profile Settings"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif" />
+            android:textColor="@color/primary_color"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <ImageButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/IBProfileSettings"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_arrow_right"
-            android:contentDescription="Arrow Icon" />
+            android:contentDescription="Arrow Icon"
+            />
     </LinearLayout>
 
     <!-- Notifications Section -->
@@ -63,31 +67,35 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_card_background"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp"
+        android:padding="18dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:elevation="6dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_notifications"
-            android:contentDescription="Notifications Icon" />
+            android:contentDescription="Notifications Icon"
+            android:layout_marginEnd="16dp"
+            />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingStart="12dp"
-            android:text="Manage Notifications"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif" />
+            android:text="Manage Workouts"
+            android:textColor="@color/primary_color"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <ImageButton
             android:id="@+id/ImButtonCalendar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_arrow_right"
             android:contentDescription="Arrow Icon"
             />
@@ -100,31 +108,37 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_card_background"
-        android:padding="12dp"
+        android:padding="18dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:elevation="6dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_goal_tracking"
-            android:contentDescription="Workout Goals Icon" />
+            android:contentDescription="Workout Goals Icon"
+            android:layout_marginEnd="16dp"
+            />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingStart="12dp"
             android:text="Show your favorite workouts"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif" />
+            android:textColor="@color/primary_color"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <ImageButton
             android:id="@+id/ButtonDisplayFavorites"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_arrow_right"
-            android:contentDescription="Arrow Icon" />
+            android:contentDescription="Arrow Icon"
+            />
     </LinearLayout>
+
 </LinearLayout>
