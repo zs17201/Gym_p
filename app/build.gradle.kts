@@ -46,4 +46,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation ("com.applandeo:material-calendar-view:1.9.2")
+    implementation ("org.json:json:20210307")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+
 }
