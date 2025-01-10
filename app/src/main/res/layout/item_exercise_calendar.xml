@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="?android:attr/selectableItemBackground"
-    android:padding="8dp">
+    android:background="@drawable/card_background"
+    android:padding="12dp">
 
     <!-- תמונת האימון -->
     <ImageView
@@ -30,7 +30,7 @@
             android:text="Exercise Name"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/text_primary" />
 
         <!-- תיאור האימון -->
         <TextView

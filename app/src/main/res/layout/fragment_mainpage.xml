@@ -28,20 +28,24 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Profile Button -->
-        <ImageButton
-            android:id="@+id/profileButton"
+
+        <ImageView
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:src="@drawable/gymlogo"
+            android:background="@drawable/gymlogo"
+            android:padding="16dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Profile" />
+            android:elevation="4dp" />
+
     </LinearLayout>
 
 
     <!-- Fragment Container (Dynamic Content) -->
 
     <!-- Bottom Navbar -->
+
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"

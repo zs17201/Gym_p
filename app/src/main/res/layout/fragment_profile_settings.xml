@@ -1,92 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.ProfileSettingsFragment">
+    android:background="@color/background_color"
+    android:padding="16dp"
+    android:scrollbars="vertical">
 
-    <!-- כותרת עמוד -->
-    <TextView
-        android:id="@+id/profileSettingsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="profile_settings"
-        android:textColor="#1E1E1E"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"/>
-
-    <!-- תמונת פרופיל -->
+    <!-- Profile Header Section -->
     <ImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/profilePicture"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/ic_profile"
-        android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:src="@drawable/ic_profile"
+        android:contentDescription="Profile Picture"
+        android:layout_marginBottom="16dp"
+        android:padding="4dp" />
 
-    <!-- שם משתמש -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameInputLayout"
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@color/primary_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/ETEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user@example.com"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:textColor="#8a8a8a"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Personal Information Section -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
+        android:orientation="vertical"
+        android:background="@drawable/rounded_card_background"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="4dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
+            android:text="Name"
+            android:textSize="16sp"
+            android:textColor="@color/primary_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:backgroundTint="@android:color/darker_gray" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="Enter Name"
+            android:textColor="#FFFFFF"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColorHint="#B0B0B0" />
 
-    <!-- אימייל -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
+        <Button
+            android:id="@+id/saveNameButton"
+            android:text="Save Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_border_gray"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
 
-            android:textColor="#000000"
+    <!-- Password Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_card_background"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:text="Password"
             android:textSize="16sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:backgroundTint="@android:color/darker_gray" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textColor="@color/primary_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp" />
 
-    <!-- שינוי סיסמא -->
+        <EditText
+            android:id="@+id/passwordEditTextSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter New Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B0B0B0" />
+
+        <Button
+            android:id="@+id/savePasswordButton"
+            android:text="Save Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_border_gray"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+
+    <!-- Account Settings Section -->
     <Button
-        android:id="@+id/changePasswordButton"
+        android:id="@+id/deleteAccountButton"
+        android:text="Delete Account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground" />
 
-        android:backgroundTint="#FF6200EE"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="16dp"
-        android:padding="12dp"/>
-
-    <!-- כפתור שמירה -->
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:backgroundTint="#FF6200EE"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="32dp"
-        android:padding="12dp"/>
 
 </LinearLayout>

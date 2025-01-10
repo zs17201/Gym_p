@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#121212"
+    android:background="#1B1B1B"
     android:padding="16dp">
 
     <!-- Header Section -->
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Create Your Workout"
         android:textSize="24sp"
-        android:textColor="#79E444"
+        android:textColor="@color/primary_color"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:layout_marginBottom="16dp"

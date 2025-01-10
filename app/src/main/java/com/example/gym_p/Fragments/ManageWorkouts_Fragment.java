@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -108,15 +110,12 @@ public class ManageWorkouts_Fragment extends Fragment {
                 if (exercises.isEmpty()) {
                     Toast.makeText(getContext(), "No workouts found for this date", Toast.LENGTH_SHORT).show();
                 } else {
-                    // העברת נתונים ל-Fragment החדש
                     WorkoutsCalFragment fragment = new WorkoutsCalFragment();
                     Bundle bundle2 = new Bundle();
                     bundle2.putSerializable("exercises", new ArrayList<>(exercises));
                     bundle2.putSerializable("day", dateString);
                     fragment.setArguments(bundle2);
-
-                    // טעינת ה-Fragment החדש
-                    requireActivity().getSupportFragmentManager().beginTransaction()
+                    getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragmentContainerView, fragment)
                             .addToBackStack(null)
                             .commit();
@@ -158,52 +157,6 @@ public class ManageWorkouts_Fragment extends Fragment {
         void onWorkoutsFetched(List<Exercise> exercises);
     }
 
-
-/*    private void fetchWorkoutsForDate(String date) {
-
-            if (email == null || email.isEmpty()) {
-                Toast.makeText(getContext(), "User email is not set.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            String sanitizedEmail = email.replace(".", ",");
-            DatabaseReference ref = FirebaseDatabase.getInstance()
-                    .getReference("usersWorkouts")
-                    .child(sanitizedEmail)
-                    .child(date);
-
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<Exercise> exercises = new ArrayList<>();
-                    for (DataSnapshot exerciseSnapshot : snapshot.getChildren()) {
-                        Exercise exercise = exerciseSnapshot.getValue(Exercise.class);
-                        if (exercise != null && exercise.getName() != null) { // בדיקת נתונים
-                            exercises.add(exercise);
-                        } else {
-                            Log.e("ManageWorkouts", "Invalid exercise data at: " + exerciseSnapshot.getKey());
-                        }
-                    }
-
-                    if (getContext() == null) {
-                        Log.e("ManageWorkouts", "Context is null");
-                        return;
-                    }
-
-                    if (exercises.isEmpty()) {
-                        Toast.makeText(getContext(), "No workouts found for this date", Toast.LENGTH_SHORT).show();
-                    }
-                    updateRecyclerView(exercises);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    if (getContext() != null) {
-                        Toast.makeText(getContext(), "Failed to load exercises: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-    }*/
 
     private String formatDate(Calendar calendar) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

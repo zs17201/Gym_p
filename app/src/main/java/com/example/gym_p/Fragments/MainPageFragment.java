@@ -3,6 +3,7 @@ package com.example.gym_p.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -82,6 +83,8 @@ public class MainPageFragment extends Fragment {
             userName.setText("Hellow, " + name);
             email = bundle.getString("user_email");
         }
+
+        replaceFragment(new StartPageFragment(),email);
 
         // Handle button clicks and send data to the next fragment
         currentButton.setOnClickListener(v -> replaceFragment(new CurrentFragment(),email));

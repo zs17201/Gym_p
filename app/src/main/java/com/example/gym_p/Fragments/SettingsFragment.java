@@ -70,6 +70,9 @@ public class SettingsFragment extends Fragment {
 
         ImageButton ImButtonCalendar = view.findViewById(R.id.ImButtonCalendar);
         ImageButton displayFavorite = view.findViewById(R.id.ButtonDisplayFavorites);
+        ImageButton profileSettings = view.findViewById(R.id.IBProfileSettings);
+        ImageButton SearchGymButton = view.findViewById(R.id.IBSearchGym);
+
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -87,6 +90,20 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 replaceFragment(new FavoritesFragment(),email);
+            }
+        });
+
+        profileSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new ProfileSettingsFragment(),email);
+            }
+        });
+
+        SearchGymButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new SearchGymFragment(),email);
             }
         });
 

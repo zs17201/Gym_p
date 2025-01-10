@@ -26,5 +26,9 @@
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.example.gym_p.Fragments.MainPageFragment"
-        android:label="MainPageFragment" />
+        android:label="MainPageFragment" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>
