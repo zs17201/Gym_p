@@ -99,10 +99,9 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void loadFavoriteWorkouts() {
-        // Reference to the "Favorite_Workouts" node for the current user
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("usersWorkouts")
-                .child(email.replace(".", ",")) // Firebase doesn't support '.' in keys
+                .child(email.replace(".", ","))
                 .child("Favorite_Workouts");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -115,12 +114,11 @@ public class FavoritesFragment extends Fragment {
                         favoriteWorkouts.add(workoutName);
                     }
                 }
-                adapter.notifyDataSetChanged(); // Notify the adapter of data changes
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database errors, e.g., show a Toast
                 Toast.makeText(getContext(), "Failed to load favorite workouts.", Toast.LENGTH_SHORT).show();
             }
         });

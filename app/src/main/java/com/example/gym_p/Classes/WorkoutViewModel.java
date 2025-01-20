@@ -16,7 +16,6 @@ public class WorkoutViewModel extends ViewModel {
     public void addExercise(Exercise exercise) {
         selectedExercises.add(exercise);
     }
-    // Add a list of exercises to the list
     public void addExercises(List<Exercise> exercises) {
         selectedExercises.addAll(exercises);
     }

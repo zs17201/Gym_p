@@ -142,7 +142,6 @@ public class CurrentFragment extends Fragment {
         });
 
 
-        // Reference the LinearLayout container where items will be added
         RecyclerView workoutRecyclerView = view.findViewById(R.id.workoutRecyclerView);
 
         workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);

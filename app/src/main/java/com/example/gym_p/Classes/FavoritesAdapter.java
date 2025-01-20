@@ -63,9 +63,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                             viewModel.addExercises(exercises);
                             Toast.makeText(holder.itemView.getContext(), "Add to your current", Toast.LENGTH_SHORT).show();
                             FavWorkoutExercises.clear();
-                            FavWorkoutExercises.addAll(exercises); // Now you can use the data
+                            FavWorkoutExercises.addAll(exercises);
 
-                            // Notify adapter about the updated data (if necessary)
                             notifyDataSetChanged();
                         }
                     });
@@ -77,7 +76,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             @Override
             public void onClick(View v) {
                 if (mainActivity != null) {
-                    mainActivity.onDeleteWorkout(workout_name,email); // Directly call the method in MainActivity
+                    mainActivity.onDeleteWorkout(workout_name,email);
                 }
             }
         });

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-    <!-- Top Navbar -->
+
     <LinearLayout
         android:id="@+id/topNavbar"
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- App Title -->
         <TextView
             android:id="@+id/topNavbarTitle"
             android:layout_width="0dp"
@@ -41,9 +40,7 @@
     </LinearLayout>
 
 
-    <!-- Fragment Container (Dynamic Content) -->
 
-    <!-- Bottom Navbar -->
 
 
 
@@ -68,7 +65,7 @@
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- Current Button -->
+
         <LinearLayout
             android:id="@+id/homeButton"
             android:layout_width="0dp"
@@ -96,7 +93,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Workouts Button -->
         <LinearLayout
             android:id="@+id/workoutsButton2"
             android:layout_width="0dp"
@@ -124,7 +120,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Settings Button -->
         <LinearLayout
             android:id="@+id/settingsButton"
             android:layout_width="0dp"

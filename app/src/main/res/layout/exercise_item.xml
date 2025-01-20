@@ -8,7 +8,6 @@
     android:layout_marginBottom="12dp"
     android:elevation="4dp">
 
-    <!-- Exercise Image -->
     <ImageView
         android:id="@+id/exercise_image"
         android:layout_width="90dp"
@@ -17,7 +16,6 @@
         android:scaleType="centerCrop"
         android:contentDescription="Exercise Image" />
 
-    <!-- Exercise Details -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,7 +23,6 @@
         android:orientation="vertical"
         android:gravity="center_vertical">
 
-        <!-- Exercise Name -->
         <TextView
             android:id="@+id/exercise_name"
             android:layout_width="match_parent"
@@ -38,7 +35,6 @@
             android:maxLines="1"
             android:layout_marginBottom="8dp" />
 
-        <!-- Exercise Description -->
         <TextView
             android:id="@+id/exercise_description"
             android:layout_width="match_parent"
@@ -51,7 +47,6 @@
             android:lineSpacingExtra="4dp" />
     </LinearLayout>
 
-    <!-- Add to Workout Button -->
     <Button
         android:id="@+id/add_to_workout_button"
         android:layout_width="wrap_content"

@@ -80,7 +80,6 @@ public class WorkoutsFragment extends Fragment {
         SearchView searchView = view.findViewById(R.id.searchView);
         resetList();
 
-        // Add search functionality
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -102,14 +101,12 @@ public class WorkoutsFragment extends Fragment {
 
 
     private void resetList() {
-        // קבלת רשימת קבוצות השרירים
+
         MuscleGroupList = new ArrayList<>(MuscleGroupData.getMuscleGroups());
 
-        // יצירת והגדרת מתאם
         muscleGroupAdapter = new MuscleGroupAdapter(getContext(), MuscleGroupList,getParentFragmentManager());
         recyclerViewMuscleGroups.setAdapter(muscleGroupAdapter);
 
-        // הגדרת LayoutManager
         recyclerViewMuscleGroups.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

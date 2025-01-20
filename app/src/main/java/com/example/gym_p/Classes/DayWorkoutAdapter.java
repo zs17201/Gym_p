@@ -63,7 +63,7 @@ public class DayWorkoutAdapter extends RecyclerView.Adapter<DayWorkoutAdapter.Ex
             name = itemView.findViewById(R.id.exerciseNameCal);
             description = itemView.findViewById(R.id.exerciseDescriptionCal);
             image = itemView.findViewById(R.id.exerciseImageCal);
-            sets = itemView.findViewById(R.id.exerciseSetsCal); // Make sure this TextView exists in your layout
+            sets = itemView.findViewById(R.id.exerciseSetsCal);
         }
     }
 }

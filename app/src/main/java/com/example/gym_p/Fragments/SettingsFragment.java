@@ -112,17 +112,15 @@ public class SettingsFragment extends Fragment {
 
     private void replaceFragment(Fragment fragment, String email) {
 
-        // Create a Bundle to pass data
         Bundle bundle = new Bundle();
-        bundle.putString("user_email", email); // Add the email to the bundle
+        bundle.putString("user_email", email);
 
-        // Set the arguments to the fragment
         fragment.setArguments(bundle);
 
-        FragmentManager fragmentManager = getFragmentManager(); // Use childFragmentManager
+        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragmentContainerView, fragment);
-        transaction.addToBackStack(null); // Optional: Allows back navigation
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

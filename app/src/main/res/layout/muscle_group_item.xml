@@ -11,7 +11,7 @@
     android:clipChildren="false"
     android:layout_marginHorizontal="8dp">
 
-    <!-- Muscle Group Image -->
+
     <ImageView
         android:id="@+id/MuscleGroup_image"
         android:layout_width="100dp"
@@ -21,7 +21,7 @@
         android:contentDescription="Muscle Group Image"
         android:clipToOutline="true" />
 
-    <!-- Muscle Group Details -->
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -29,7 +29,7 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <!-- Muscle Group Title -->
+
         <TextView
             android:id="@+id/MuscleGroup_name"
             android:layout_width="wrap_content"

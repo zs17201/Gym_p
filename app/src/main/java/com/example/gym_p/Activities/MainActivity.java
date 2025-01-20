@@ -2,6 +2,7 @@ package com.example.gym_p.Activities;
 
 import static java.security.AccessController.getContext;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.example.gym_p.Classes.WorkoutViewModel;
 import com.example.gym_p.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.BuildConfig;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -198,32 +200,28 @@ public class MainActivity extends AppCompatActivity {
     public void onAddToCurrentWorkout(String workout_name, String email, final DataFetchedCallback callback) {
         final List<Exercise> currentWorkoutExercises = new ArrayList<>();
 
-        // Reference to the "Current_Workout" section in Firebase
         DatabaseReference currentWorkoutRef = FirebaseDatabase.getInstance()
                 .getReference("usersWorkouts")
-                .child(email.replace(".", ","))  // Firebase email formatting
+                .child(email.replace(".", ","))
                 .child("Favorite_Workouts")
-                .child(workout_name); // The workout name
+                .child(workout_name);
 
-        // Listen for the data in the "workout_name" node
         currentWorkoutRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Loop through all the exercises under the workout name
+
                 for (DataSnapshot exerciseSnapshot : snapshot.getChildren()) {
-                    // Deserialize the exercise object
+
                     Exercise exercise = exerciseSnapshot.getValue(Exercise.class);
                     if (exercise != null) {
-                        currentWorkoutExercises.add(exercise);  // Add exercise to the list
+                        currentWorkoutExercises.add(exercise);
                     }
                 }
-                // Now notify the caller (MainActivity) that data is fetched
                 callback.onDataFetched(currentWorkoutExercises);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle any errors that occur while retrieving the data
                 Toast.makeText(MainActivity.this, "Failed to load exercises", Toast.LENGTH_SHORT).show();
             }
         });
@@ -236,8 +234,8 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseReference favoriteWorkoutsRef = FirebaseDatabase.getInstance()
                 .getReference("usersWorkouts")
-                .child(email.replace(".", ",")) // Handle email format for Firebase keys
-                .child("Favorite_Workouts");  // Section for favorite workouts
+                .child(email.replace(".", ","))
+                .child("Favorite_Workouts");
 
         // Remove workout from favorites
         favoriteWorkoutsRef.child(workout_name).removeValue()

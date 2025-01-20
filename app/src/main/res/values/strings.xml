@@ -8,5 +8,6 @@
     <string name="signup_prompt">Don\'t have an account? Sign Up</string>
     <string name="welcome_title">Welcome Back</string>
     <string name="workout_tracker">Workout Tracker</string>
+    <string name="api_key">AIzaSyDxGCObPR9bmyYBOR3b5dA8CwtTDH9U-P8</string>
 
 </resources>

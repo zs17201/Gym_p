@@ -38,7 +38,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     public void onBindViewHolder(ExerciseViewHolder holder, int position) {
         Exercise exercise = exercises.get(position);
 
-        // Set exercise name and description
         holder.exerciseName.setText(exercise.getName());
         holder.exerciseDescription.setText(exercise.getDescription());
         holder.exerciseImage.setImageResource(exercise.getImageResId());

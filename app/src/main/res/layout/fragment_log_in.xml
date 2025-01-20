@@ -5,7 +5,6 @@
     android:background="@color/background_color"
     android:padding="24dp">
 
-    <!-- Logo -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="200dp"
@@ -16,7 +15,6 @@
         android:contentDescription="Fitness Logo" />
 
 
-    <!-- Tabs -->
     <LinearLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
@@ -60,7 +58,6 @@
 
     </LinearLayout>
 
-    <!-- Input Fields -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,8 +67,6 @@
         android:gravity="center_horizontal">
 
 
-
-        <!-- Email -->
         <EditText
             android:id="@+id/et_email_login"
             android:layout_width="match_parent"
@@ -85,7 +80,7 @@
             android:textSize="16sp"
             android:inputType="textEmailAddress"/>
 
-        <!-- Password -->
+
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
@@ -111,7 +106,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Signup Button -->
 
 
 </RelativeLayout>

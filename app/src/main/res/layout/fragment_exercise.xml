@@ -17,7 +17,7 @@ android:padding="8dp">
     android:textColorHint="#79E444"
     android:layout_marginBottom="8dp" />
 
-<!-- RecyclerView in the middle -->
+
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerViewExercises"

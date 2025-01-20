@@ -22,11 +22,11 @@ import java.util.List;
 
 public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.WorkoutViewHolder> {
     private List<Exercise> exerciseList;
-    private String email; // Add email as a member variable
+    private String email;
 
     public CurrentAdapter(List<Exercise> exerciseList, String email) {
         this.exerciseList = exerciseList;
-        this.email = email; // Initialize email
+        this.email = email;
     }
 
     @NonNull
@@ -90,7 +90,7 @@ public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.WorkoutV
             Context context = holder.itemView.getContext();
             if (context instanceof MainActivity) {
                 MainActivity mainActivity = (MainActivity) context;
-                mainActivity.addExerciseToDatabase(exercise, email,getCurrentDate()); // Pass email
+                mainActivity.addExerciseToDatabase(exercise, email,getCurrentDate());
             }
 
             holder.weight.setText("");

@@ -1,12 +1,11 @@
 <shape xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="ExtraText">
-    <!-- Background color -->
     <solid android:color="#2C2C2C"/>
 
-    <!-- Rounded corners -->
+
     <corners android:radius="12dp" />
-    <!-- Padding -->
+
     <padding
         android:left="12dp"
         android:top="12dp"

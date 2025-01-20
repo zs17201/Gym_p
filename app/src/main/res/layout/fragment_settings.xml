@@ -5,7 +5,7 @@
     android:background="@color/background_color"
     android:padding="24dp">
 
-    <!-- Header Section -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:paddingBottom="24dp" />
 
-    <!-- Profile Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             />
     </LinearLayout>
 
-    <!-- Notifications Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,7 +101,6 @@
             />
     </LinearLayout>
 
-    <!-- Workout Goals Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,7 +6,7 @@
     android:background="@drawable/card_background"
     android:padding="12dp">
 
-    <!-- תמונת האימון -->
+
     <ImageView
         android:id="@+id/exerciseImageCal"
         android:layout_width="80dp"
@@ -15,14 +15,14 @@
         android:src="@drawable/ic_sample"
         />
 
-    <!-- טקסטים -->
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- שם האימון -->
+
         <TextView
             android:id="@+id/exerciseNameCal"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:textColor="@color/text_primary" />
 
-        <!-- תיאור האימון -->
+
         <TextView
             android:id="@+id/exerciseDescriptionCal"
             android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
             android:textColor="@android:color/darker_gray" />
     </LinearLayout>
 
-    <!-- סטים -->
+
     <TextView
         android:id="@+id/exerciseSetsCal"
         android:layout_width="wrap_content"

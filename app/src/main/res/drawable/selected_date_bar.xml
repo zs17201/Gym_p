@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#03A9F4"/> <!-- Blue bar for selected date -->
+    <solid android:color="#03A9F4"/>
     <size android:width="4dp"/>
 </shape>

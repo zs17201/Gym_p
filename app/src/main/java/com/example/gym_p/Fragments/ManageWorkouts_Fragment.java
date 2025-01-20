@@ -99,7 +99,7 @@ public class ManageWorkouts_Fragment extends Fragment {
             email = bundle.getString("user_email");
         }
         workoutDates = new ArrayList<>();
-        // Fetch workouts data from Firebase
+
         fetchWorkoutsFromFirebase();
 
         calendarView.setOnDayClickListener(eventDay -> {
@@ -209,7 +209,7 @@ public class ManageWorkouts_Fragment extends Fragment {
         for (String date : workoutDates) {
             String[] dateParts = date.split("-");
             int year = Integer.parseInt(dateParts[0]);
-            int month = Integer.parseInt(dateParts[1]) - 1;  // Month is 0-based in Calendar (January = 0)
+            int month = Integer.parseInt(dateParts[1]) - 1;
             int day = Integer.parseInt(dateParts[2]);
 
             Calendar calendar = Calendar.getInstance();

@@ -8,13 +8,13 @@
     </style>
     <style name="CalendarDayTextStyle">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#FFFFFF</item> <!-- White text for day numbers -->
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="CalendarWeekDayTextStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#B0BEC5</item> <!-- Light gray for weekdays -->
+        <item name="android:textColor">#B0BEC5</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 

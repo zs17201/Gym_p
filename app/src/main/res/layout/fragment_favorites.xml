@@ -6,7 +6,6 @@
     android:padding="16dp"
     android:background="@color/background_color">
 
-    <!-- Title -->
     <TextView
         android:id="@+id/favoritesTitle"
         android:layout_width="match_parent"
@@ -19,14 +18,12 @@
         android:letterSpacing="0.1"
         android:layout_marginBottom="16dp" />
 
-    <!-- Divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444"
         android:layout_marginBottom="16dp" />
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFavorites"
         android:layout_width="match_parent"

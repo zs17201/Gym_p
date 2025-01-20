@@ -43,18 +43,14 @@ public class MuscleGroupAdapter extends RecyclerView.Adapter<MuscleGroupAdapter.
     public void onBindViewHolder(MuscleGroupViewHolder holder, int position) {
         MuscleGroup muscleGroup = muscleGroups.get(position);
 
-        // Set the name of the muscle group
         holder.muscleGroupName.setText(muscleGroup.getName());
 
-        // Set the icon for the muscle group
         holder.muscleGroupIcon.setImageResource(muscleGroup.getIconResource());
 
-        // Add click listener to open the exercises list
         holder.itemView.setOnClickListener(view -> {
-            // צור את ה-Fragment עם רשימת התרגילים
+
             ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(new ArrayList<>(muscleGroup.getExercises()));
 
-            // השתמש ב-FragmentManager שעבר ל-Adapter
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragmentContainerView, exerciseFragment);
             transaction.addToBackStack(null);
@@ -67,7 +63,6 @@ public class MuscleGroupAdapter extends RecyclerView.Adapter<MuscleGroupAdapter.
         return muscleGroups.size();
     }
 
-    // ViewHolder class for MuscleGroup item
     public static class MuscleGroupViewHolder extends RecyclerView.ViewHolder {
         ImageView muscleGroupIcon;
         TextView muscleGroupName;
