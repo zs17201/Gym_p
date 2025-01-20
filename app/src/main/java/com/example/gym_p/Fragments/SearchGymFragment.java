@@ -1,10 +1,15 @@
 package com.example.gym_p.Fragments;
 
+import static androidx.core.content.ContextCompat.getSystemService;
 import static androidx.core.location.LocationManagerCompat.isLocationEnabled;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gym_p.Activities.MainActivity;
 import com.example.gym_p.BuildConfig;
 import android.Manifest;
 import com.example.gym_p.R;
@@ -59,7 +65,7 @@ import retrofit2.http.Query;
  * Use the {@link SearchGymFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
+public class SearchGymFragment extends Fragment implements OnMapReadyCallback, LocationListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,16 +76,13 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
     private String mParam1;
     private String mParam2;
 
-    private List<Double> myLocation = new ArrayList<>();
-
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
-    private TextView locationTextView;
     private GoogleMap mMap;
     private MapView mapView;
-    private String apiKey = "";
-    private static final double TEL_AVIV_LAT = 32.0853;
-    private static final double TEL_AVIV_LNG = 34.7818;
+    private double lat = 0;
+    private double lon = 0;
+
+    private LocationManager locationManager;
+    private String provider;
 
     public SearchGymFragment() {
         // Required empty public constructor
@@ -115,28 +118,58 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_gym, container, false);
 
+
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+
+        locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            provider = LocationManager.GPS_PROVIDER;
+        } else if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            provider = LocationManager.NETWORK_PROVIDER;
+        } else {
+            provider = null;
+            Toast.makeText(requireContext(), "No location provider enabled. Please enable GPS or Network.", Toast.LENGTH_SHORT).show();
+        }
+
+        if (provider != null) {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1
+                );
+            } else {
+                locationManager.requestLocationUpdates(provider,5000,10,this);
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null) {
+                    if (location.getLatitude() == 0.0 && location.getLongitude() == 0.0) {
+                        Toast.makeText(requireContext(), "Default location detected. Awaiting a valid location update.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "location :" +location.getLatitude(), Toast.LENGTH_SHORT).show();
+                        onLocationChanged(location);
+                    }
+                }
+            }
+
+        }
+        else{
+            Toast.makeText(requireContext(), "provider is null", Toast.LENGTH_SHORT).show();
+        }
 
         return view;
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Set the camera to Tel Aviv location
-        LatLng telAviv = new LatLng(TEL_AVIV_LAT, TEL_AVIV_LNG);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telAviv, 12));
-
-        // Add a marker for Tel Aviv
-        mMap.addMarker(new MarkerOptions().position(telAviv).title("Tel Aviv"));
-
-        // Search for gyms near Tel Aviv
-        searchNearbyGyms(TEL_AVIV_LAT, TEL_AVIV_LNG);
+        LatLng initial = new LatLng(lat, lon);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initial, 12));
+        mMap.addMarker(new MarkerOptions().position(initial).title("Your location"));
+        searchNearbyGyms(lat, lon);
     }
 
     private void searchNearbyGyms(double latitude, double longitude) {
@@ -157,7 +190,7 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 requireActivity().runOnUiThread(() -> {
-                    Toast.makeText(getContext(), "Failed to fetch gyms: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Failed to fetch gyms: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
 
@@ -165,7 +198,6 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String responseData = response.body().string();
-                    Log.d("API Response", responseData);
                     try {
                         JSONObject jsonObject = new JSONObject(responseData);
                         JSONArray results = jsonObject.getJSONArray("results");
@@ -181,46 +213,42 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
                             LatLng gymLocation = new LatLng(gymLat, gymLng);
 
                             requireActivity().runOnUiThread(() -> {
-                                mMap.addMarker(new MarkerOptions()
-                                        .position(gymLocation)
-                                        .title(gymName));
+                                if (mMap != null) {
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(gymLocation)
+                                            .title(gymName));
+                                }
                             });
                         }
                     } catch (JSONException e) {
                         requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(getContext(), "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
                     }
                 } else {
                     requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(getContext(), "Failed to fetch gyms: " + response.message(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Failed to fetch gyms: " + response.message(), Toast.LENGTH_SHORT).show();
                     });
                 }
             }
-
         });
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                enableUserLocation();
-            } else {
-                Toast.makeText(getContext(), "Location permission is required to display your location.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+        if (requestCode == 1) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-    private void enableUserLocation() {
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
-        } else {
-            ActivityCompat.requestPermissions(requireActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    LOCATION_PERMISSION_REQUEST_CODE);
+                    locationManager.requestLocationUpdates(provider, 5000, 10, this);
+                }
+            } else {
+                Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -238,6 +266,13 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
         if (mapView != null) {
             mapView.onResume();
         }
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.requestLocationUpdates(provider, 5000, 10, this);
+        }
     }
 
     @Override
@@ -246,6 +281,7 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
         if (mapView != null) {
             mapView.onPause();
         }
+        locationManager.removeUpdates(this);
     }
 
     @Override
@@ -272,4 +308,18 @@ public class SearchGymFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        if (mMap != null) {
+            mMap.clear();
+            LatLng userLocation = new LatLng(lat, lon);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12));
+            mMap.addMarker(new MarkerOptions().position(userLocation).title("Your location"));
+
+            searchNearbyGyms(lat, lon);
+        }
+    }
 }
